@@ -1,0 +1,28 @@
+{
+  "$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
+  "type": "connection",
+  "id": "pdf-presenter-lite",
+  "name": "pdf-presenter-lite",
+  "shortname": "PDF Presenter Lite",
+  "description": "Control PDF Presenter Lite over OSC — slide navigation, black/white screen, sections, laser pointer, wallpaper export, timed auto-advance, and watched-folder file open.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": "git+https://github.com/allansargeant/companion-module-pdf-presenter-lite.git",
+  "bugs": "https://github.com/allansargeant/companion-module-pdf-presenter-lite/issues",
+  "maintainers": [
+    {
+      "name": "Allan Sargeant",
+      "email": ""
+    }
+  ],
+  "runtime": {
+    "type": "node22",
+    "api": "nodejs-ipc",
+    "apiVersion": "0.0.0",
+    "entrypoint": "../src/main.js"
+  },
+  "legacyIds": [],
+  "manufacturer": "Allan Sargeant",
+  "products": ["PDF Presenter Lite"],
+  "keywords": ["pdf", "presenter", "osc", "slides"]
+}
