@@ -7,8 +7,8 @@
   "description": "Control PDF Presenter Lite over OSC — slide navigation, black/white screen, sections, laser pointer, wallpaper export, timed auto-advance, and watched-folder file open.",
   "version": "1.0.0",
   "license": "MIT",
-  "repository": "git+https://github.com/allansargeant/companion-module-pdf-presenter-lite.git",
-  "bugs": "https://github.com/allansargeant/companion-module-pdf-presenter-lite/issues",
+  "repository": "git+https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite.git",
+  "bugs": "https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/issues",
   "maintainers": [
     {
       "name": "Allan Sargeant",

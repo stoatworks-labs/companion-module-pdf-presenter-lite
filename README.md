@@ -6,7 +6,7 @@
 > it in production.
 
 A [Bitfocus Companion](https://bitfocus.io/companion) connection module for
-[PDF Presenter Lite](https://github.com/allansargeant/pdf-presenter-lite) —
+[PDF Presenter Lite](https://github.com/stoatworks-labs/pdf-presenter-lite) —
 control a running instance from a Stream Deck or any other Companion
 surface over its OSC control protocol.
 
@@ -84,7 +84,7 @@ a developer module:
   function names differ throughout. It was a structural reference for "how
   do you build a Companion module," not a source of copied code.
 - **[OSCPoint](https://github.com/phuvf/oscpoint)** itself — see
-  [PDF Presenter Lite's own README](https://github.com/allansargeant/pdf-presenter-lite#inspiration--prior-art)
+  [PDF Presenter Lite's own README](https://github.com/stoatworks-labs/pdf-presenter-lite#inspiration--prior-art)
   for how it shaped the app whose protocol this module speaks.
 
 ## Project Setup
