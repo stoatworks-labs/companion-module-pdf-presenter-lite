@@ -6,7 +6,7 @@
 > it in production.
 
 A [Bitfocus Companion](https://bitfocus.io/companion) connection module for
-[PDF Presenter Lite](https://github.com/stoatworks-labs/pdf-presenter-lite) —
+[PDF Presenter](https://github.com/stoatworks-labs/pdf-presenter) —
 control a running instance from a Stream Deck or any other Companion
 surface over its OSC control protocol.
 
@@ -44,10 +44,10 @@ would have to fabricate data the app doesn't provide.
 ## Setup
 
 1. Install and enable this module in Companion (see **Installing** below).
-2. In PDF Presenter Lite, click **Start OSC** in the titlebar (it's
+2. In PDF Presenter, click **Start OSC** in the titlebar (it's
    remembered across restarts once started once).
 3. Add a new connection using this module, and set:
-   - **App host** — the machine running PDF Presenter Lite (default
+   - **App host** — the machine running PDF Presenter (default
      `127.0.0.1`, i.e. Companion running on the same machine).
    - **App listen port** — default `35551`, matches the app's own default.
    - **Local feedback port** — default `35550`, matches the app's own
@@ -66,7 +66,7 @@ a developer module:
 2. In Companion, go to **Settings → Developer modules path** and point it
    at the parent directory containing this repo's folder.
 3. Restart Companion (or use its "Rescan for developer modules" action if
-   available in your version) — "PDF Presenter Lite" appears as an
+   available in your version) — "PDF Presenter" appears as an
    installable connection module.
 
 ## Inspiration & prior art
@@ -84,7 +84,7 @@ a developer module:
   function names differ throughout. It was a structural reference for "how
   do you build a Companion module," not a source of copied code.
 - **[OSCPoint](https://github.com/phuvf/oscpoint)** itself — see
-  [PDF Presenter Lite's own README](https://github.com/stoatworks-labs/pdf-presenter-lite#inspiration--prior-art)
+  [PDF Presenter's own README](https://github.com/stoatworks-labs/pdf-presenter#inspiration--prior-art)
   for how it shaped the app whose protocol this module speaks.
 
 ## Project Setup

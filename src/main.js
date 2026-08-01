@@ -68,7 +68,7 @@ export default class ModuleInstance extends InstanceBase {
         width: 12,
         label: "Connection",
         value:
-          "PDF Presenter Lite's own OSC settings panel shows its listen/feedback ports — match them here. Defaults line up with the app's own defaults.",
+          "PDF Presenter's own OSC settings panel shows its listen/feedback ports — match them here. Defaults line up with the app's own defaults.",
       },
       {
         type: "textinput",

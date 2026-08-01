@@ -3,8 +3,8 @@
   "type": "connection",
   "id": "pdf-presenter-lite",
   "name": "pdf-presenter-lite",
-  "shortname": "PDF Presenter Lite",
-  "description": "Control PDF Presenter Lite over OSC — slide navigation, black/white screen, sections, laser pointer, wallpaper export, timed auto-advance, and watched-folder file open.",
+  "shortname": "PDF Presenter",
+  "description": "Control PDF Presenter over OSC — slide navigation, black/white screen, sections, laser pointer, wallpaper export, timed auto-advance, and watched-folder file open.",
   "version": "1.0.0",
   "license": "MIT",
   "repository": "git+https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite.git",
@@ -23,6 +23,6 @@
   },
   "legacyIds": [],
   "manufacturer": "Allan Sargeant",
-  "products": ["PDF Presenter Lite"],
+  "products": ["PDF Presenter"],
   "keywords": ["pdf", "presenter", "osc", "slides"]
 }
