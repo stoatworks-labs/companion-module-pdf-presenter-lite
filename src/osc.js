@@ -119,7 +119,7 @@ function handleMessage(self, oscMsg) {
   }
 
   self.refreshVariableValues();
-  self.checkFeedbacks();
+  self.checkAllFeedbacks();
   if (definitionsChanged) {
     self.updateActions();
     self.updateFeedbacks();
