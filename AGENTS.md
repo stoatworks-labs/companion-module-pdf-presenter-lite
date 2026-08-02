@@ -16,8 +16,8 @@ folder.
 JavaScript, Node 22 runtime, `nodejs-ipc` API. Small repo — 15 tracked files, ~670 lines
 across `src/`.
 
-**The `-lite` in this repo's name is deliberate leftover.** The app was renamed from *PDF
-Presenter Lite* to **PDF Presenter** (the *Lite* name now belongs to its hosted browser
+**The `-lite` in this repo's name is deliberate leftover.** The app was renamed from _PDF
+Presenter Lite_ to **PDF Presenter** (the _Lite_ name now belongs to its hosted browser
 build, which has no OSC and so nothing to do with this module). Every user-facing label
 here follows the app, but `manifest.json`'s `id` and `name` stay `pdf-presenter-lite`, and
 so does the repo — a module id is what an installed Companion config points at, so
@@ -44,9 +44,9 @@ The app has its own OSC listener. Nothing else is installed on the app side beyo
 
 ## 3. It has a near-identical sibling
 
-| Repo | Controls |
-|---|---|
-| **companion-module-pdf-presenter-lite** (this) | PDF Presenter |
+| Repo                                               | Controls                             |
+| -------------------------------------------------- | ------------------------------------ |
+| **companion-module-pdf-presenter-lite** (this)     | PDF Presenter                        |
 | **companion-module-presentation-commander-client** | Presentation Commander's Client Node |
 
 Same file layout, same OSC ports, same defaults, largely the same actions. The Client Node
@@ -58,16 +58,16 @@ Keynote/PowerPoint/Google Slides/Canva sources as well as PDF.
 
 ## 4. Layout
 
-| File | Role |
-|---|---|
-| `src/main.js` | `InstanceBase` lifecycle, config fields, wiring |
-| `src/actions.js` | The buttons — the bulk of the module |
-| `src/feedbacks.js` | Button lighting: slideshow state, OSC file access enabled |
-| `src/variables.js` | Text/state exposed to Companion expressions |
-| `src/osc.js` | Send/receive, port handling, inbound address parsing |
-| `src/choices.js` | Dropdown option lists |
-| `src/upgrades.js` | Companion config migrations (currently a stub) |
-| `companion/manifest.json` | Module id, version, runtime declaration |
+| File                      | Role                                                      |
+| ------------------------- | --------------------------------------------------------- |
+| `src/main.js`             | `InstanceBase` lifecycle, config fields, wiring           |
+| `src/actions.js`          | The buttons — the bulk of the module                      |
+| `src/feedbacks.js`        | Button lighting: slideshow state, OSC file access enabled |
+| `src/variables.js`        | Text/state exposed to Companion expressions               |
+| `src/osc.js`              | Send/receive, port handling, inbound address parsing      |
+| `src/choices.js`          | Dropdown option lists                                     |
+| `src/upgrades.js`         | Companion config migrations (currently a stub)            |
+| `companion/manifest.json` | Module id, version, runtime declaration                   |
 
 ## 5. Deliberate omissions — do not "fix" these
 

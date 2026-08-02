@@ -3,6 +3,7 @@ import { UpgradeScripts } from "./upgrades.js";
 import UpdateActions from "./actions.js";
 import UpdateFeedbacks from "./feedbacks.js";
 import UpdateVariableDefinitions from "./variables.js";
+import UpdatePresets from "./presets.js";
 import oscListener from "./osc.js";
 
 function defaultState() {
@@ -45,6 +46,7 @@ export default class ModuleInstance extends InstanceBase {
     this.updateActions();
     this.updateFeedbacks();
     this.updateVariableDefinitions();
+    this.updatePresets();
     this.refreshVariableValues();
     await oscListener.connect(this);
   }
@@ -130,6 +132,10 @@ export default class ModuleInstance extends InstanceBase {
 
   updateVariableDefinitions() {
     UpdateVariableDefinitions(this);
+  }
+
+  updatePresets() {
+    UpdatePresets(this);
   }
 }
 
