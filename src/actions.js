@@ -1,4 +1,11 @@
-import { sectionChoices, fileChoices } from "./choices.js";
+import {
+  sectionChoices,
+  fileChoices,
+  TRANSITION_EFFECT_CHOICES,
+  TRANSITION_DIRECTION_CHOICES,
+  TRANSITION_MIN_MS,
+  TRANSITION_MAX_MS,
+} from "./choices.js";
 
 const PREFIX = "/pdfpresenter";
 
@@ -9,6 +16,44 @@ function send(self, path, args = []) {
     `${PREFIX}${path}`,
     args,
   );
+}
+
+function transitionEffectOption() {
+  return {
+    id: "effect",
+    type: "dropdown",
+    label: "Effect",
+    choices: TRANSITION_EFFECT_CHOICES,
+    default: "fade",
+  };
+}
+
+function transitionDirectionOption() {
+  return {
+    id: "direction",
+    type: "dropdown",
+    label: "Direction (push / wipe / cover / uncover only)",
+    choices: TRANSITION_DIRECTION_CHOICES,
+    default: "left",
+  };
+}
+
+function transitionDurationOption() {
+  return {
+    id: "durationMs",
+    type: "number",
+    label: "Duration (ms)",
+    min: TRANSITION_MIN_MS,
+    max: TRANSITION_MAX_MS,
+    default: 500,
+    useVariables: true,
+  };
+}
+
+async function sendTransitionDuration(self, raw) {
+  const ms = parseInt(await self.parseVariablesInField(String(raw)), 10);
+  if (isNaN(ms)) return;
+  send(self, "/slideshow/transition/setduration", [{ type: "i", value: ms }]);
 }
 
 function slideNumberOption(defaultValue = 1) {
@@ -148,6 +193,45 @@ export default function UpdateActions(self) {
           { type: "i", value: event.options.width },
           { type: "i", value: event.options.height },
         ]),
+    },
+    set_transition: {
+      name: "Set slide transition (effect, direction and duration)",
+      options: [
+        transitionEffectOption(),
+        transitionDirectionOption(),
+        transitionDurationOption(),
+      ],
+      callback: async (event) => {
+        send(self, "/slideshow/transition/seteffect", [
+          { type: "s", value: String(event.options.effect) },
+        ]);
+        send(self, "/slideshow/transition/setdirection", [
+          { type: "s", value: String(event.options.direction) },
+        ]);
+        await sendTransitionDuration(self, event.options.durationMs);
+      },
+    },
+    set_transition_effect: {
+      name: "Set slide transition effect",
+      options: [transitionEffectOption()],
+      callback: async (event) =>
+        send(self, "/slideshow/transition/seteffect", [
+          { type: "s", value: String(event.options.effect) },
+        ]),
+    },
+    set_transition_direction: {
+      name: "Set slide transition direction",
+      options: [transitionDirectionOption()],
+      callback: async (event) =>
+        send(self, "/slideshow/transition/setdirection", [
+          { type: "s", value: String(event.options.direction) },
+        ]),
+    },
+    set_transition_duration: {
+      name: "Set slide transition duration",
+      options: [transitionDurationOption()],
+      callback: async (event) =>
+        sendTransitionDuration(self, event.options.durationMs),
     },
     pause_auto_advance: {
       name: "Pause auto-advance",

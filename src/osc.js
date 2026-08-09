@@ -93,6 +93,21 @@ function handleMessage(self, oscMsg) {
     case "/slideshow/section/slidesremaining":
       self.state.sectionSlidesRemaining = args[0]?.value ?? 0;
       break;
+    // The JSON blob carries the same three values as the individual messages
+    // that follow it, and all four are sent together — it's here so a surface
+    // can read the whole transition in one variable.
+    case "/slideshow/transition":
+      self.state.transition = textArg(args);
+      break;
+    case "/slideshow/transition/effect":
+      self.state.transitionEffect = textArg(args);
+      break;
+    case "/slideshow/transition/direction":
+      self.state.transitionDirection = textArg(args);
+      break;
+    case "/slideshow/transition/duration":
+      self.state.transitionDuration = args[0]?.value ?? 0;
+      break;
     case "/files/enabled":
       self.state.filesEnabled = !!args[0]?.value;
       break;

@@ -1,3 +1,8 @@
+import {
+  TRANSITION_EFFECT_CHOICES,
+  TRANSITION_DIRECTION_CHOICES,
+} from "./choices.js";
+
 export default function UpdateFeedbacks(self) {
   self.setFeedbackDefinitions({
     slideshowState: {
@@ -20,6 +25,45 @@ export default function UpdateFeedbacks(self) {
         },
       ],
       callback: (feedback) => self.state.state === feedback.options.state,
+    },
+    // Unlike the laser pointer and auto-advance (see presets.js), the app does
+    // broadcast the transition as a standalone value — so a bank of transition
+    // buttons can genuinely light the one that is selected rather than guess.
+    transitionEffect: {
+      type: "boolean",
+      name: "Slide transition effect",
+      description:
+        "Highlights the button when the given transition effect is the one selected.",
+      defaultStyle: { bgcolor: 0x0066cc, color: 0xffffff },
+      options: [
+        {
+          id: "effect",
+          type: "dropdown",
+          label: "Effect",
+          choices: TRANSITION_EFFECT_CHOICES,
+          default: "fade",
+        },
+      ],
+      callback: (feedback) =>
+        self.state.transitionEffect === feedback.options.effect,
+    },
+    transitionDirection: {
+      type: "boolean",
+      name: "Slide transition direction",
+      description:
+        "Highlights the button when the given transition direction is the one selected. The app keeps a direction set even under an effect that ignores it, so pair this with the effect feedback if that matters.",
+      defaultStyle: { bgcolor: 0x0066cc, color: 0xffffff },
+      options: [
+        {
+          id: "direction",
+          type: "dropdown",
+          label: "Direction",
+          choices: TRANSITION_DIRECTION_CHOICES,
+          default: "left",
+        },
+      ],
+      callback: (feedback) =>
+        self.state.transitionDirection === feedback.options.direction,
     },
     filesEnabled: {
       type: "boolean",

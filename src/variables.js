@@ -29,5 +29,11 @@ export default function UpdateVariableDefinitions(self) {
     activeFolderFileNames: {
       name: "JSON array of file names in the watched folder",
     },
+    transition: { name: "Slide transition, as a JSON object" },
+    transitionEffect: { name: "Slide transition effect" },
+    transitionDirection: {
+      name: "Slide transition direction (push / wipe / cover / uncover only)",
+    },
+    transitionDuration: { name: "Slide transition duration, in milliseconds" },
   });
 }

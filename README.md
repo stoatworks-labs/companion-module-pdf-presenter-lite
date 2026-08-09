@@ -36,19 +36,29 @@ All builds, checksums and release notes: [github.com/stoatworks-labs/companion-m
   slide, go to a named section (or the next/previous section), start/stop
   the Output window, toggle black/white screen, toggle the laser pointer
   overlay, set the current slide as desktop wallpaper, pause/resume timed
-  auto-advance, enable/disable OSC actions or feedback, request a feedback
-  refresh, set the watched folder, request its file list, and open a file
-  from it by name.
-- **Feedbacks** — _Slideshow state_ (edit / running / running-with-auto-advance-paused)
-  and _OSC file access enabled_.
+  auto-advance, set the slide transition (effect, direction and duration,
+  together or one at a time), enable/disable OSC actions or feedback, request
+  a feedback refresh, set the watched folder, request its file list, and open
+  a file from it by name.
+- **Feedbacks** — _Slideshow state_ (edit / running / running-with-auto-advance-paused),
+  _Slide transition effect_, _Slide transition direction_, and
+  _OSC file access enabled_.
 - **Variables** — presentation name, slide count (total and visible),
   state, current slide, slides remaining, current section index/name/
   slides-remaining, derived previous/next section name and first slide,
-  file-access-enabled, watched folder (relative and full path), and the
-  watched folder's file count/name list.
+  file-access-enabled, watched folder (relative and full path), the
+  watched folder's file count/name list, and the current transition
+  (effect, direction, duration, plus the whole thing as JSON).
 - Section and file-open actions offer a live dropdown of whatever the app
   last reported, with a variables-aware custom-value option for dynamic
   use.
+
+The transition effect and direction dropdowns are **fixed lists mirrored from
+the app**, not discovered from it — the app reports which transition is
+selected, never which ones it supports. It also ignores a name it doesn't
+recognise, silently and deliberately, so that a typo can't change the look of
+a live show. The practical consequence: a module older than the app simply
+won't offer a newer effect, and won't misbehave if you type one in.
 
 **Deliberately not built**: a feedback for laser-pointer-on or
 auto-advance-enabled state — the app's OSC protocol never actually

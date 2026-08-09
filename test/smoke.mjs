@@ -76,6 +76,7 @@ const self = {
   },
   setVariableValues: () => {},
   parseVariablesInString: async (s) => s,
+  parseVariablesInField: async (s) => s,
   refreshVariableValues: () => {},
   updateActions: () => {},
   updateFeedbacks: () => {},
@@ -166,6 +167,99 @@ await check("every preset variable reference names a real variable", () => {
   for (const m of texts.matchAll(/\$\(MyDeck:([a-zA-Z0-9_]+)\)/g)) {
     assert.ok(variables[m[1]], `${m[1]} is defined`);
   }
+});
+
+console.log("\n== transitions ==");
+// The app IGNORES an effect or direction name it doesn't recognise — silently,
+// by design, so a typo can't change the look of a live show. That makes a
+// mismatch between this module's dropdown ids and the app's enum invisible at
+// runtime: the button simply does nothing. These checks pin the wire format.
+await check("transition actions send the documented addresses", async () => {
+  const sent = [];
+  const capturing = {
+    ...self,
+    oscSend: (host, port, address, args) => sent.push({ address, args }),
+  };
+  UpdateActions(capturing);
+  const fired = { ...actions };
+  UpdateActions(self);
+
+  await fired.set_transition_effect.callback({ options: { effect: "wipe" } });
+  await fired.set_transition_direction.callback({
+    options: { direction: "bottom-right" },
+  });
+  await fired.set_transition_duration.callback({
+    options: { durationMs: 750 },
+  });
+
+  assert.deepEqual(
+    sent.map((m) => m.address),
+    [
+      "/pdfpresenter/slideshow/transition/seteffect",
+      "/pdfpresenter/slideshow/transition/setdirection",
+      "/pdfpresenter/slideshow/transition/setduration",
+    ],
+  );
+  assert.deepEqual(sent[0].args, [{ type: "s", value: "wipe" }]);
+  assert.deepEqual(sent[1].args, [{ type: "s", value: "bottom-right" }]);
+  assert.deepEqual(sent[2].args, [{ type: "i", value: 750 }]);
+});
+await check("the combined action sends all three", async () => {
+  const sent = [];
+  const capturing = {
+    ...self,
+    oscSend: (host, port, address, args) => sent.push({ address, args }),
+  };
+  UpdateActions(capturing);
+  const fired = { ...actions };
+  UpdateActions(self);
+
+  await fired.set_transition.callback({
+    options: { effect: "dip-black", direction: "top", durationMs: 1200 },
+  });
+  assert.equal(sent.length, 3);
+  assert.deepEqual(sent[2].args, [{ type: "i", value: 1200 }]);
+});
+await check("a non-numeric duration sends nothing at all", async () => {
+  const sent = [];
+  const capturing = {
+    ...self,
+    oscSend: (host, port, address, args) => sent.push({ address, args }),
+  };
+  UpdateActions(capturing);
+  const fired = { ...actions };
+  UpdateActions(self);
+
+  await fired.set_transition_duration.callback({
+    options: { durationMs: "$(nonexistent:variable)" },
+  });
+  assert.equal(sent.length, 0);
+});
+await check("every effect and direction preset id is unique", async () => {
+  const { TRANSITION_EFFECT_CHOICES, TRANSITION_DIRECTION_CHOICES } =
+    await import(`${MOD}choices.js`);
+  for (const list of [
+    TRANSITION_EFFECT_CHOICES,
+    TRANSITION_DIRECTION_CHOICES,
+  ]) {
+    const ids = list.map((c) => c.id);
+    assert.equal(new Set(ids).size, ids.length);
+    for (const id of ids) assert.match(id, /^[a-z-]+$/);
+  }
+});
+await check("feedback tracks the effect the app last reported", () => {
+  const probe = { ...self, state: { ...self.state, transitionEffect: "zoom" } };
+  UpdateFeedbacks(probe);
+  const captured = feedbacks;
+  UpdateFeedbacks(self);
+  assert.equal(
+    captured.transitionEffect.callback({ options: { effect: "zoom" } }),
+    true,
+  );
+  assert.equal(
+    captured.transitionEffect.callback({ options: { effect: "fade" } }),
+    false,
+  );
 });
 
 console.log("\n== transport ==");

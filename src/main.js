@@ -28,6 +28,10 @@ function defaultState() {
     activeFolder: "",
     activeFolderFullPath: "",
     files: [],
+    transition: "",
+    transitionEffect: "",
+    transitionDirection: "",
+    transitionDuration: 0,
   };
 }
 
@@ -124,6 +128,10 @@ export default class ModuleInstance extends InstanceBase {
       activeFolderFullPath: this.state.activeFolderFullPath,
       activeFolderFileCount: this.state.files.length,
       activeFolderFileNames: JSON.stringify(this.state.files),
+      transition: this.state.transition,
+      transitionEffect: this.state.transitionEffect,
+      transitionDirection: this.state.transitionDirection,
+      transitionDuration: this.state.transitionDuration,
     });
   }
 

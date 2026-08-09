@@ -29,6 +29,7 @@ const AMBER = 0xcc7a00;
 const GREEN = 0x009900;
 const DARKGREEN = 0x003300;
 const BRIGHTGREEN = 0x00ff00;
+const BLUE = 0x0066cc;
 
 function preset({
   name,
@@ -196,6 +197,48 @@ export default function UpdatePresets(self) {
     actions: [{ actionId: "set_wallpaper", options: {} }],
   });
 
+  // --- Transitions ----------------------------------------------------------
+  // These DO light up, unlike the laser/auto-advance buttons above: the app
+  // broadcasts the selected effect and direction, so the feedback reports the
+  // real state rather than one this module assumed.
+  const transitionPreset = (id, effect, text) => {
+    presets[id] = preset({
+      name: `Transition: ${text.replace("\n", " ")}`,
+      text,
+      actions: [{ actionId: "set_transition_effect", options: { effect } }],
+      feedbacks: [
+        {
+          feedbackId: "transitionEffect",
+          options: { effect },
+          style: { bgcolor: BLUE, color: WHITE },
+        },
+      ],
+    });
+  };
+  transitionPreset("transition_cut", "cut", "CUT");
+  transitionPreset("transition_fade", "fade", "FADE");
+  transitionPreset("transition_dip_black", "dip-black", "DIP\nBLACK");
+  transitionPreset("transition_dip_white", "dip-white", "DIP\nWHITE");
+  transitionPreset("transition_push", "push", "PUSH");
+  transitionPreset("transition_wipe", "wipe", "WIPE");
+  transitionPreset("transition_cover", "cover", "COVER");
+  transitionPreset("transition_uncover", "uncover", "UNCOVER");
+  transitionPreset("transition_zoom", "zoom", "ZOOM");
+
+  presets.transition_display = preset({
+    name: "Current transition and duration",
+    text: `$(${self.label}:transitionEffect)\n$(${self.label}:transitionDuration)ms`,
+    size: "14",
+    bgcolor: BLACK,
+  });
+  presets.transition_duration = preset({
+    name: "Set transition duration",
+    text: "TRANS\n500ms",
+    actions: [
+      { actionId: "set_transition_duration", options: { durationMs: 500 } },
+    ],
+  });
+
   // --- Auto-advance ---------------------------------------------------------
   presets.pause_auto = preset({
     name: "Pause timed auto-advance",
@@ -330,6 +373,33 @@ export default function UpdatePresets(self) {
           presets: ["pause_auto", "resume_auto"],
         },
       ],
+    },
+    {
+      id: "transitions",
+      name: "Transitions",
+      description:
+        "One transition applies to the whole deck — there is no per-slide setting. Only the Output window transitions; the presenter view always cuts. Direction is picked separately and only affects Push, Wipe, Cover and Uncover.",
+      definitions: [
+        {
+          id: "transitions-effects",
+          type: "simple",
+          name: "Effects",
+          presets: [
+            "transition_cut",
+            "transition_fade",
+            "transition_dip_black",
+            "transition_dip_white",
+            "transition_push",
+            "transition_wipe",
+            "transition_cover",
+            "transition_uncover",
+            "transition_zoom",
+            "transition_display",
+            "transition_duration",
+          ],
+        },
+      ],
+      keywords: ["transition", "fade", "dip", "push", "wipe"],
     },
     {
       id: "files",
