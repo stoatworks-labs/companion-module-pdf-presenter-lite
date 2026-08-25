@@ -19,12 +19,12 @@ titlebar.
 
 ## Download
 
-**[v1.2.0](https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases/tag/v1.2.0)**
+**[v1.2.1](https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases/tag/v1.2.1)**
 
 This release contains:
 
-- [`companion-module-pdf-presenter-lite-pkg.tgz`](https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases/latest/download/companion-module-pdf-presenter-lite-pkg.tgz) — npm package, 48 KB
-- [`pdf-presenter-lite-1.2.0.tgz`](https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases/download/v1.2.0/pdf-presenter-lite-1.2.0.tgz) — npm package, 48 KB
+- [`companion-module-pdf-presenter-lite-pkg.tgz`](https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases/latest/download/companion-module-pdf-presenter-lite-pkg.tgz) — npm package, 49 KB
+- [`pdf-presenter-lite-1.2.1.tgz`](https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases/download/v1.2.1/pdf-presenter-lite-1.2.1.tgz) — npm package, 49 KB
 
 All builds, checksums and release notes: [github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases](https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases).
 
