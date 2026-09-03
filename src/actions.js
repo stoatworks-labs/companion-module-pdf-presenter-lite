@@ -50,8 +50,12 @@ function transitionDurationOption() {
   };
 }
 
-async function sendTransitionDuration(self, raw) {
-  const ms = parseInt(await self.parseVariablesInField(String(raw)), 10);
+/** The option arrives already expanded: Companion resolves a `useVariables`
+ *  field before invoking the callback. `parseVariablesInField` does not exist
+ *  in base 2.x — nor does `parseVariablesInString` — and calling it throws when
+ *  the action fires, while the module still loads cleanly. */
+function sendTransitionDuration(self, raw) {
+  const ms = parseInt(String(raw), 10);
   if (isNaN(ms)) return;
   send(self, "/slideshow/transition/setduration", [{ type: "i", value: ms }]);
 }
@@ -86,10 +90,7 @@ export default function UpdateActions(self) {
       name: "Go to slide number",
       options: [slideNumberOption()],
       callback: async (event) => {
-        const n = parseInt(
-          await self.parseVariablesInField(String(event.options.slideNumber)),
-          10,
-        );
+        const n = parseInt(String(event.options.slideNumber), 10);
         if (!isNaN(n)) send(self, "/goto/slide", [{ type: "i", value: n }]);
       },
     },
@@ -117,9 +118,7 @@ export default function UpdateActions(self) {
         },
       ],
       callback: async (event) => {
-        const name = await self.parseVariablesInField(
-          String(event.options.sectionName),
-        );
+        const name = String(event.options.sectionName);
         send(self, "/goto/section", [{ type: "s", value: name }]);
       },
     },
@@ -208,7 +207,7 @@ export default function UpdateActions(self) {
         send(self, "/slideshow/transition/setdirection", [
           { type: "s", value: String(event.options.direction) },
         ]);
-        await sendTransitionDuration(self, event.options.durationMs);
+        sendTransitionDuration(self, event.options.durationMs);
       },
     },
     set_transition_effect: {
@@ -280,9 +279,7 @@ export default function UpdateActions(self) {
         },
       ],
       callback: async (event) => {
-        const path = await self.parseVariablesInField(
-          String(event.options.relativePath),
-        );
+        const path = String(event.options.relativePath);
         send(self, "/files/setpath", [{ type: "s", value: path }]);
       },
     },
@@ -305,9 +302,7 @@ export default function UpdateActions(self) {
         },
       ],
       callback: async (event) => {
-        const filename = await self.parseVariablesInField(
-          String(event.options.filename),
-        );
+        const filename = String(event.options.filename);
         send(self, "/files/open", [{ type: "s", value: filename }]);
       },
     },
