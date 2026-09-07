@@ -33,7 +33,9 @@ export const TRANSITION_EFFECT_CHOICES = [
 ];
 
 // Named for where the NEW slide comes from; everything travels away from that
-// edge. Only push/wipe/cover/uncover read it.
+// edge. Only push/wipe/cover/uncover read it. "dynamic" is resolved by the app
+// per page change — from left advancing, from right stepping back — and is
+// what the feedback reports, never the edge it resolved to.
 export const TRANSITION_DIRECTION_CHOICES = [
   { id: "left", label: "From left" },
   { id: "top-left", label: "From top left" },
@@ -43,6 +45,7 @@ export const TRANSITION_DIRECTION_CHOICES = [
   { id: "bottom-right", label: "From bottom right" },
   { id: "bottom", label: "From bottom" },
   { id: "bottom-left", label: "From bottom left" },
+  { id: "dynamic", label: "Dynamic (left forward, right back)" },
 ];
 
 /** Matches the app's own clamp — a button that sends 10000 would otherwise

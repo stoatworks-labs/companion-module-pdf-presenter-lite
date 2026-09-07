@@ -378,7 +378,7 @@ export default function UpdatePresets(self) {
       id: "transitions",
       name: "Transitions",
       description:
-        "One transition applies to the whole deck — there is no per-slide setting. Only the Output window transitions; the presenter view always cuts. Direction is picked separately and only affects Push, Wipe, Cover and Uncover.",
+        "One transition applies to the whole deck — there is no per-slide setting. Only the Output window transitions; the presenter view always cuts. Direction is picked separately and only affects Push, Wipe, Cover and Uncover; Dynamic comes from the left when advancing and from the right when stepping back.",
       definitions: [
         {
           id: "transitions-effects",
