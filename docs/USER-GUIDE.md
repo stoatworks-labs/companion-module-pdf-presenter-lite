@@ -3,7 +3,7 @@
 This is a [Bitfocus Companion](https://bitfocus.io/companion) connection module for
 [PDF Presenter](https://github.com/stoatworks-labs/pdf-presenter). It lets a Stream Deck (or any
 other Companion surface) drive the app while it's running: slides, sections, the output window,
-black/white screen, the laser pointer, and the watched-folder file list.
+black/white screen, the laser pointer, slide transitions, and the watched-folder file list.
 
 It talks straight to the app's own OSC listener over UDP and listens for feedback on a local port.
 There's nothing to install on the app end beyond turning OSC on.
@@ -79,6 +79,20 @@ custom value that takes variables, for when you want it to change on the fly.
 | Toggle laser pointer overlay              | Show/hide the pointer                         |
 | Set current slide as desktop wallpaper    | Useful for a holding slide behind the output  |
 
+**Transitions**
+
+| Action                                                | What it does                                                        |
+| ----------------------------------------------------- | ------------------------------------------------------------------- |
+| Set slide transition (effect, direction and duration) | Set all three in one press                                          |
+| Set slide transition effect                           | Cut, fade, dip to black/white, push, wipe, cover, uncover, zoom     |
+| Set slide transition direction                        | Where the new slide comes from (push, wipe, cover and uncover only) |
+| Set slide transition duration                         | 50 to 5000 ms; takes variables                                      |
+
+The effect and direction dropdowns are fixed lists copied from the app, not discovered from it.
+**Dynamic** direction brings the slide in from the left going forward and from the right going
+back, and needs PDF Presenter 1.7.0 or later. The app ignores a name it doesn't recognise, so a
+typo can't change the look of a live show.
+
 **Auto-advance**
 
 | Action                                   | What it does                 |
@@ -100,9 +114,13 @@ custom value that takes variables, for when you want it to change on the fly.
 
 ## Feedbacks
 
-Two, and only two:
+Four, and only four:
 
 - **Slideshow state:** edit / running / running-with-auto-advance-paused.
+- **Slide transition effect:** lights when the chosen effect is the one selected.
+- **Slide transition direction:** lights when the chosen direction is the one selected. The app
+  keeps a direction set even under an effect that ignores it, so pair it with the effect feedback
+  if that matters.
 - **OSC file access enabled**.
 
 > **I've left out a feedback for "laser pointer on" or "auto-advance enabled" on purpose.** The
@@ -135,6 +153,10 @@ Two, and only two:
 | `activeFolderFullPath`      | Watched folder, full path                                    |
 | `activeFolderFileCount`     | Number of files in the watched folder                        |
 | `activeFolderFileNames`     | JSON array of file names in the watched folder               |
+| `transition`                | Slide transition, as a JSON object                           |
+| `transitionEffect`          | Slide transition effect                                      |
+| `transitionDirection`       | Slide transition direction (push/wipe/cover/uncover only)    |
+| `transitionDuration`        | Slide transition duration, in milliseconds                   |
 
 The section variables are the handy ones for building a presenter's surface: a button showing
 `$(<connection-label>:nextSectionName)` tells the operator what's coming up without them having to
