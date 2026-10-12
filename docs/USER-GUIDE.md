@@ -9,14 +9,17 @@ It talks straight to the app's own OSC listener over UDP and listens for feedbac
 There's nothing to install on the app end beyond turning OSC on.
 
 > **This module was built with AI assistance and reviewed by a human.** Check it over before you
-> rely on it for a show. It's **not in the official Companion module store**, so it installs as a
-> developer module, which takes a few more steps. They're below.
+> rely on it for a show. It's **not in the official Companion module store**, so it installs from
+> its release package or as a developer module. Both are below.
 
 ---
 
 ## Setting it up
 
-**1. Install the module.** It isn't in the store, so you have to point Companion at it:
+**1. Install the module.** It isn't in the store. The quick way is to download
+`companion-module-pdf-presenter-lite-pkg.tgz` from the [releases page](https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases) and import it with
+Companion's **Modules → Import module package**. Or point Companion at a checkout as a developer
+module:
 
 ```bash
 git clone https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite

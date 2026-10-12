@@ -80,10 +80,12 @@ provide.
    OSC settings panel points back at the Companion machine's IP (not
    `127.0.0.1`).
 
-## Installing (Developer Modules Path)
+## Installing
 
-This module isn't in the official Companion module store, so install it as
-a developer module:
+This module isn't in the official Companion module store. The quick way is to
+download `companion-module-pdf-presenter-lite-pkg.tgz` from the
+[releases page](https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite/releases) and import it with Companion's
+**Modules → Import module package**. Or install it as a developer module:
 
 1. Clone this repo, then `npm install`.
 2. In Companion, go to **Settings → Developer modules path** and point it
@@ -102,7 +104,7 @@ a developer module:
   looks like: the `InstanceBase` lifecycle, config field shapes,
   `self.oscSend`, and how actions/feedbacks/variables/presets get registered.
   None of its code is reused here. Every address string, variable and helper
-  in this repo is written against PDF Presenter Lite's own protocol (renamed,
+  in this repo is written against PDF Presenter's own protocol (renamed,
   and no longer OSCPoint-branded), and the file and function names are
   different throughout. It showed how a Companion module is put together, and
   that's all it was used for; no code was copied from it.

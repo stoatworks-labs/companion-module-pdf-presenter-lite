@@ -13,7 +13,7 @@ next/previous slide, jump to a slide or a named section, start/stop the Output w
 black/white screen, laser pointer, timed auto-advance, and opening files from a watched
 folder.
 
-JavaScript, Node 22 runtime, `nodejs-ipc` API. Small repo — 15 tracked files, ~670 lines
+JavaScript, Node 22 runtime, `nodejs-ipc` API. Small repo — 31 tracked files, ~1,450 lines
 across `src/`.
 
 **The `-lite` in this repo's name is deliberate leftover.** The app was renamed from _PDF
@@ -35,7 +35,7 @@ Companion surface  ──▶  this module  ──UDP OSC 35551──▶  PDF Pre
 The app has its own OSC listener. Nothing else is installed on the app side beyond clicking
 **Start OSC** in its titlebar. So:
 
-- **The protocol is owned by [`pdf-presenter-lite`](https://github.com/stoatworks-labs/pdf-presenter), not by this repo.**
+- **The protocol is owned by [`pdf-presenter`](https://github.com/stoatworks-labs/pdf-presenter), not by this repo.**
   If you change an OSC address or payload there, this module breaks silently — a Stream Deck
   button simply stops working mid-show, with no error anywhere obvious. Change both together.
 - Two ports, and they are **not** a request/response pair: 35551 is the app's inbound
