@@ -50,8 +50,9 @@ The app has its own OSC listener. Nothing else is installed on the app side beyo
 | **companion-module-presentation-commander-client** | Presentation Commander's Client Node |
 
 Same file layout, same OSC ports, same defaults, largely the same actions. The Client Node
-module is a superset — it adds PowerPoint media transport and Program Out, and covers
-Keynote/PowerPoint/Google Slides/Canva sources as well as PDF.
+module adds PowerPoint media transport and Program Out, and covers
+Keynote/PowerPoint/Google Slides/Canva sources as well as PDF. This one has slide transitions,
+which the Client Node module doesn't.
 
 **Treat "the same bug probably exists in the sibling" as the default assumption.** A fix to
 `osc.js` or `variables.js` here is worth checking there in the same sitting, and vice versa.
