@@ -1,22 +1,22 @@
 # Companion — PDF Presenter user guide
 
-This is **a [Bitfocus Companion](https://bitfocus.io/companion) connection module for
-[PDF Presenter](https://github.com/stoatworks-labs/pdf-presenter)**. It lets a Stream Deck — or
-any other Companion surface — drive a running copy of the app: slides, sections, the output
-window, black/white screen, the laser pointer, and the watched-folder file list.
+This is a [Bitfocus Companion](https://bitfocus.io/companion) connection module for
+[PDF Presenter](https://github.com/stoatworks-labs/pdf-presenter). It lets a Stream Deck (or any
+other Companion surface) drive the app while it's running: slides, sections, the output window,
+black/white screen, the laser pointer, and the watched-folder file list.
 
-It talks straight to the app's own OSC listener over UDP and receives feedback on a local port.
-There is nothing to install on the app side beyond turning OSC on.
+It talks straight to the app's own OSC listener over UDP and listens for feedback on a local port.
+There's nothing to install on the app end beyond turning OSC on.
 
-> **This module was built with AI assistance and reviewed by a human.** Review it before relying
-> on it in production. It is **not in the official Companion module store** — it installs as a
-> developer module, which is a slightly longer path and is covered below.
+> **This module was built with AI assistance and reviewed by a human.** Check it over before you
+> rely on it for a show. It's **not in the official Companion module store**, so it installs as a
+> developer module, which takes a few more steps. They're below.
 
 ---
 
 ## Setting it up
 
-**1. Install the module.** It is not in the store, so Companion has to be pointed at it:
+**1. Install the module.** It isn't in the store, so you have to point Companion at it:
 
 ```bash
 git clone https://github.com/stoatworks-labs/companion-module-pdf-presenter-lite
@@ -24,13 +24,13 @@ cd companion-module-pdf-presenter-lite
 npm install
 ```
 
-In Companion, go to **Settings → Developer modules path** and point it at **the parent directory
-containing this repo's folder** — not at the folder itself. Restart Companion, or use "Rescan for
-developer modules" if your version has it. "PDF Presenter" then appears as an installable
-connection.
+In Companion, go to **Settings → Developer modules path** and point it at **the parent folder
+that contains this repo's folder**, not at the folder itself. Restart Companion, or use "Rescan for
+developer modules" if your version has it, and "PDF Presenter" turns up as a connection you can
+install.
 
-**2. Turn OSC on in the app.** In PDF Presenter, click **Start OSC** in the titlebar. It is
-remembered across restarts once you have started it once.
+**2. Turn OSC on in the app.** In PDF Presenter, click **Start OSC** in the titlebar. Once you've
+started it once, it remembers across restarts.
 
 **3. Add the connection**, and set three fields:
 
@@ -40,10 +40,10 @@ remembered across restarts once you have started it once.
 | **App listen port**     | `35551`     | Where the app listens. Matches the app's own default.                                    |
 | **Local feedback port** | `35550`     | Where this module listens for the app's replies. Matches the app's own default.          |
 
-**If Companion and the app are on different machines**, change **App host** to the app's real IP
-— _and_ make sure the app's own OSC settings panel has its **Feedback host** pointing back at the
-Companion machine's IP, not `127.0.0.1`. Miss that second half and actions will work while every
-variable stays empty, which is a confusing way to fail.
+**If Companion and the app are on different machines**, change **App host** to the app's actual
+IP, _and_ make sure the **Feedback host** in the app's own OSC settings panel points back at the
+Companion machine's IP, not `127.0.0.1`. Miss that second half and the actions work while every
+variable stays empty, which is a confusing way for it to go wrong.
 
 ---
 
@@ -65,8 +65,8 @@ variable stays empty, which is a confusing way to fail.
 | Go to first slide of next section     | Skip forward a section  |
 | Go to first slide of previous section | Skip back a section     |
 
-The named-section action offers **a live dropdown of whatever the app last reported**, plus a
-variables-aware custom value for dynamic use.
+The named-section action gives you **a live dropdown of whatever the app last reported**, plus a
+custom value that takes variables, for when you want it to change on the fly.
 
 **Output window**
 
@@ -102,13 +102,13 @@ variables-aware custom value for dynamic use.
 
 Two, and only two:
 
-- **Slideshow state** — edit / running / running-with-auto-advance-paused.
+- **Slideshow state:** edit / running / running-with-auto-advance-paused.
 - **OSC file access enabled**.
 
-> **There is deliberately no feedback for "laser pointer on" or "auto-advance enabled".** The
-> app's OSC protocol never broadcasts either as a standalone value — only the combined
-> edit/running/paused state is sent — so such a feedback would have to fabricate data the app does
-> not provide. If you need a button to _look_ like it knows, drive it from the slideshow state
+> **I've left out a feedback for "laser pointer on" or "auto-advance enabled" on purpose.** The
+> app's OSC protocol never broadcasts either as a value of its own (it only sends the combined
+> edit/running/paused state), so a feedback for either would have to make up data the app doesn't
+> provide. If you need a button to _look_ like it knows, drive it from the slideshow state
 > instead.
 
 ---
@@ -136,9 +136,9 @@ Two, and only two:
 | `activeFolderFileCount`     | Number of files in the watched folder                        |
 | `activeFolderFileNames`     | JSON array of file names in the watched folder               |
 
-The section variables are the useful ones for building a presenter's surface: a button showing
-`$(<connection-label>:nextSectionName)` tells the operator what is coming without them reading
-the deck. The prefix is whatever you named the connection in Companion.
+The section variables are the handy ones for building a presenter's surface: a button showing
+`$(<connection-label>:nextSectionName)` tells the operator what's coming up without them having to
+read the deck. The prefix is whatever you called the connection in Companion.
 
 ---
 
@@ -157,7 +157,7 @@ the deck. The prefix is whatever you named the connection in Companion.
 
 ## See also
 
-- [README](../README.md) — what it does, installation, and the prior art this module was
-  structured against
-- [PDF Presenter](https://github.com/stoatworks-labs/pdf-presenter) — the application this
-  controls, and its OSC protocol
+- [README](../README.md): what it does, installing it, and the prior art I looked at for how to
+  structure the module
+- [PDF Presenter](https://github.com/stoatworks-labs/pdf-presenter): the app this controls, and
+  its OSC protocol
